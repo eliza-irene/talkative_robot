@@ -53,3 +53,5 @@ pet = gets.chomp.downcase
 	end
 
 
+
+puts "Hey there instructor!"
