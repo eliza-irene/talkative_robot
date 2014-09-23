@@ -1,3 +1,5 @@
+require 'pry'
+
 puts "Howdy!!"
 
 puts "What's your name?"
@@ -9,6 +11,7 @@ age = gets.chomp.to_i
 puts "Hi #{name} who is #{age} years old!"
 
 first_initial = name.chars.first
+
 puts "Do you mind if I call you #{first_initial}?"
 initial_answer = gets.chomp.downcase
 	if initial_answer == "no"
