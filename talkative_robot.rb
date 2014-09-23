@@ -51,3 +51,7 @@ pet = gets.chomp.downcase
 	else
 		puts "You didn't answer with 'yes' or 'no'"
 	end
+
+
+
+puts "Hey there instructor!"
