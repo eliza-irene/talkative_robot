@@ -1,5 +1,6 @@
 require 'pry'
 
+
 puts "Let's get started.  I'll need your name, age, and gender."
 puts "What's your name?"
 name = gets.chomp.capitalize
@@ -27,7 +28,7 @@ when age < 75
 when age > 75
 	old_future_age = age - 75
 	puts "#{old_future_age} years ago you turned 75! Wow, you're up there!"
-when age = 75
+when age == 75
 	puts "You're exactly 75 years old!"
 end
 
