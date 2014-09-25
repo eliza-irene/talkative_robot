@@ -119,10 +119,6 @@ pet_statement(user)
 
 grocery_list = ["cheddar cheese", "wine", "croissants", "avacado", "tomato"]
 
-
-# We're asking the user if they have grabbed an item off the list
-# We're removing the item if they have, saying oh no if they haven't
-
 response = grocery_statement(grocery_list)
 grocery_response(response)
-butter_reminder(grocery_list)
+groceries_including_butter = butter_reminder(grocery_list)
