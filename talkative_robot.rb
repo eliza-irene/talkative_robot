@@ -70,14 +70,14 @@ def has_pet?(user)
 	user[:pet] == "yes"
 end
 
-def grocery_statement(grocery_list) # TO-DO break it up in multiple functions, apply Single-Purpose (define in one sentence, no "and"'s')
+def grocery_statement(grocery_list) 
 	random_grocery_item = grocery_list.sample
 	puts "When you were at the grocery store, did you grab the #{random_grocery_item}?"
 	answer = gets.chomp.downcase
 	return { item: random_grocery_item, answer: answer}
 end
 
-def grocery_response(response)
+def grocery_response(response, grocery_list)
 	item = response[:item]
 	answer = response[:answer]	
 	if answer == "yes"  
@@ -120,5 +120,5 @@ pet_statement(user)
 grocery_list = ["cheddar cheese", "wine", "croissants", "avacado", "tomato"]
 
 response = grocery_statement(grocery_list)
-grocery_response(response)
+grocery_response(response, grocery_list)
 groceries_including_butter = butter_reminder(grocery_list)
