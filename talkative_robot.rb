@@ -1,4 +1,5 @@
 require 'pry'
+require 'csv'
 
 def author_info
 	author = {name: "Liz", age: "32", gender: "female", color: "purple",  spirit_animal: "dog", pet: "yes"}
@@ -95,10 +96,11 @@ def grocery_response(response, grocery_list)
  	answer = response[:answer]	
  	if answer == "yes"  
  		puts "Great." 
-     	grocery_list.delete(item) 
+     	grocery_list.delete(item)
  	else 
  		puts "Oh no!"
  	end
+ 	grocery_list
 end
 
 def butter_reminder(grocery_list)
@@ -106,19 +108,23 @@ def butter_reminder(grocery_list)
  	grocery_list << "butter"
 end
 
-def grocery_statements(grocery_list)
- 	grocery_statement
- 	butter_reminder
-end
-
 def grocery_stuff
 	grocery_list = IO.read("grocery_list.txt").chomp.split(", ")
 	grocery_list.map! { |item| item.downcase }
 	grocery_items_needed(grocery_list)
 	response = grocery_statement(grocery_list)
+	puts "grocery_list = #{grocery_list}"
 	updated_grocery_list = grocery_response(response, grocery_list)
+	puts "updated_grocery_list = #{updated_grocery_list}"
 	groceries_including_butter = butter_reminder(updated_grocery_list)
-	IO.write("new_grocery_list.txt", groceries_including_butter)
+	groceries_including_butter = IO.write("new_grocery_list.txt", groceries_including_butter)
+	create_csv_grocery_file
+end
+
+def create_csv_grocery_file
+	CSV.open("new_grocery_list.csv", "w") do |csv|
+  		csv << [" cheddar cheese", " wine", " croissants", " avocado", " tomato", " butter"]
+	end
 end
 
 def return_author(people)
@@ -130,27 +136,27 @@ def select_by_name(list_of_users, first_name)
 end
 
 
-greeting
-user = user_input
-author = author_info
-people = [user, author]
+# greeting
+# user = user_input
+# author = author_info
+# people = [user, author]
 
-puts "You can drive!" if user[:age] >= 16
+# puts "You can drive!" if user[:age] >= 16
 
-gender_greeting(user)
-first_initial_response(user[:name])		
-age_statement(user[:age])
+# gender_greeting(user)
+# first_initial_response(user[:name])		
+# age_statement(user[:age])
 
-user[:name].upcase!
-puts "Hey #{user[:name]}, where are you going!?"
+# user[:name].upcase!
+# puts "Hey #{user[:name]}, where are you going!?"
 
-whats_up_message
+# whats_up_message
 
-spirt_animal_statement(user)
-pet_statement(user)
+# spirt_animal_statement(user)
+# pet_statement(user)
 
 grocery_stuff
 
-puts "Goodbye!  Authored by: #{return_author(people)[:name]}."
+# puts "Goodbye!  Authored by: #{return_author(people)[:name]}."
 
 

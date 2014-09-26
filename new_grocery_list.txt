@@ -1,1 +1,1 @@
-cheddar cheese, wine, croissants, avocado, butter
+["cheddar cheese", "croissants", "avocado", "tomato", "butter"]
