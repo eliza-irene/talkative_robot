@@ -70,11 +70,15 @@ def pet_statement(user)
  	puts has_pet?(user) ? "You have a pet! Your spirit animal is proud!" : "You don't have a pet. :( Your spirit animal is disappointed."
 end
 
-def has_pet?(user)
- 	user[:pet] == "yes"
+def has_pet?(potential_pet_owner)
+ 	potential_pet_owner[:pet] == "yes"
 end
 
-def grocery_items_needed(grocery_list) #map
+def spirt_animal_statement(user)
+	puts "#{user[:name]}, you are now channeling the mighty #{user[:spirit_animal]} whose power color is #{user[:color]}!  You are almost ready to take over the world!!!"
+end
+
+def grocery_items_needed(grocery_list) 
 	puts "Time to go to the grocery store. Items to buy:"
 	grocery_list.each {|item| puts "Item #{grocery_list.index(item)+1} -- #{item}"}
 end
@@ -107,8 +111,22 @@ def grocery_statements(grocery_list)
  	butter_reminder
 end
 
+def grocery_stuff
+	grocery_list = IO.read("grocery_list.txt").chomp.split(", ")
+	grocery_list.map! { |item| item.downcase }
+	grocery_items_needed(grocery_list)
+	response = grocery_statement(grocery_list)
+	updated_grocery_list = grocery_response(response, grocery_list)
+	groceries_including_butter = butter_reminder(updated_grocery_list)
+	IO.write("new_grocery_list.txt", groceries_including_butter)
+end
+
 def return_author(people)
-	people.reject{|person| person[:name] != "Liz"}[0]
+	people.reject{ |person| person[:name] != "Liz" }.first
+end
+
+def select_by_name(list_of_users, first_name)
+	list_of_people.select{ |person| person[:name] == first_name }.first
 end
 
 
@@ -128,15 +146,11 @@ puts "Hey #{user[:name]}, where are you going!?"
 
 whats_up_message
 
-puts "#{user[:name]}, you are now channeling the mighty #{user[:spirit_animal]} whose power color is #{user[:color]}!  You are almost ready to take over the world!!!"
-
+spirt_animal_statement(user)
 pet_statement(user)
 
-grocery_list = ["cheddar cheese", "wine", "croissants", "avocado", "tomato"]
-
-grocery_items_needed(grocery_list)
-response = grocery_statement(grocery_list)
-grocery_response(response, grocery_list)
-groceries_including_butter = butter_reminder(grocery_list)
+grocery_stuff
 
 puts "Goodbye!  Authored by: #{return_author(people)[:name]}."
+
+
