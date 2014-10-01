@@ -102,9 +102,11 @@ class Person
   def first_initial_preference
     ask_about_first_initial
     if cool_with_first_initial? 
-      @name = @name.chars.first
+      puts "Don't worry about it, I'll call you #{@name}." 
+    else
+      @name = @name.chars.first 
+      puts "Okay, I'll call you #{@name}." 
     end
-    cool_with_first_initial? ? "Don't worry about it, I'll call you #{@name}." : "Okay, I'll call you #{@name}."
   end
 
   def whats_up_message
